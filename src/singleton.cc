@@ -25,6 +25,8 @@ namespace dp {
         return *core_;
       }
 
+      /// 释放单例对象，一般用于优雅退出，比如要做valgrind检测。用户应注意调用Destory()后不应再调用instance()了，否则
+      /// 会生成新对象。
       static void Destory() {
         std::lock_guard<std::mutex> lock(mutex_);
         if (core_ != NULL) {
