@@ -53,16 +53,22 @@ namespace dp {
 
 int main() {
   using namespace dp;
-  LoggerFactory *db_logger_factory = new DBLoggerFactory();
-  Logger *db_logger = db_logger_factory->createLogger();
-  db_logger->trace();
-  LoggerFactory *file_logger_factory = new FileLoggerFactory();
-  Logger *file_logger = file_logger_factory->createLogger();
-  file_logger->trace();
-  delete db_logger_factory;
-  delete db_logger;
-  delete file_logger_factory;
-  delete file_logger;
+
+  {
+    LoggerFactory *logger_factory = new DBLoggerFactory(); ///
+    Logger *logger = logger_factory->createLogger();
+    logger->trace();
+    delete logger_factory;
+    delete logger;
+  }
+
+  {
+    LoggerFactory *logger_factory = new FileLoggerFactory();
+    Logger *logger = logger_factory->createLogger();
+    logger->trace();
+    delete logger_factory;
+    delete logger;
+  }
 
   return 0;
 }

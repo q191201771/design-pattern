@@ -49,12 +49,18 @@ namespace dp {
 
 int main() {
   using namespace dp;
-  Logger *db_logger = LoggerFactory::createLogger(LoggerFactory::TYPE_DB);
-  Logger *file_logger = LoggerFactory::createLogger(LoggerFactory::TYPE_File);
-  db_logger->trace();
-  file_logger->trace();
-  delete db_logger;
-  delete file_logger;
+
+  {
+    Logger *logger = LoggerFactory::createLogger(LoggerFactory::TYPE_DB); ///
+    logger->trace();
+    delete logger;
+  }
+
+  {
+    Logger *logger = LoggerFactory::createLogger(LoggerFactory::TYPE_File);
+    logger->trace();
+    delete logger;
+  }
 
   return 0;
 }
