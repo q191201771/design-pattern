@@ -11,48 +11,50 @@
 
 namespace dp {
 
-  class Product {
+  class Logger {
     public:
-      virtual ~Product() {}
-      virtual void func() = 0;
+      virtual ~Logger() {}
+      virtual void trace() = 0;
   };
 
-  class ConcreteProductA : public Product {
+  class DBLogger : public Logger {
     public:
-      void func() { printf("ConcreteProductA::func()\n"); }
+      virtual void trace() { printf("DBLogger::trace()\n"); }
   };
 
-  class ConcreteProductB : public Product {
+  class FileLogger : public Logger {
     public:
-      void func() { printf("ConcreteProductB::func()\n"); }
+      virtual void trace() { printf("FileLogger::trace()\n"); }
   };
 
-  class Factory {
+  /////////////////////////////////////////////////////
+
+  class LoggerFactory {
     public:
       enum Type {
-        TYPE_A = 1,
-        TYPE_B
+        TYPE_DB = 1,
+        TYPE_File
       };
 
-      static Product *createProduct(Type type) {
+      static Logger *createLogger(Type type) {
         switch (type) {
-          case TYPE_A: return new ConcreteProductA();
-          case TYPE_B: return new ConcreteProductB();
+          case TYPE_DB: return new DBLogger();
+          case TYPE_File: return new FileLogger();
         }
         return NULL;
       }
   };
 
-}
+} // namespace dp
 
 int main() {
   using namespace dp;
-  Product *pa = Factory::createProduct(Factory::TYPE_A);
-  Product *pb = Factory::createProduct(Factory::TYPE_B);
-  pa->func();
-  pb->func();
-  delete pa;
-  delete pb;
+  Logger *db_logger = LoggerFactory::createLogger(LoggerFactory::TYPE_DB);
+  Logger *file_logger = LoggerFactory::createLogger(LoggerFactory::TYPE_File);
+  db_logger->trace();
+  file_logger->trace();
+  delete db_logger;
+  delete file_logger;
 
   return 0;
 }
