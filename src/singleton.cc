@@ -25,6 +25,14 @@ namespace dp {
         return *core_;
       }
 
+      static void Destory() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (core_ != NULL) {
+          delete core_;
+          core_ = NULL;
+        }
+      }
+
       void set_a(int a) { a_ = a; }
       int get_a() const { return a_; }
 
@@ -53,6 +61,7 @@ int main() {
   assert(&Singleton::instance() == &Singleton::instance());
   Singleton::instance().set_a(7);
   assert(Singleton::instance().get_a() == 7);
+  Singleton::Destory();
 
   return 0;
 }
