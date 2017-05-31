@@ -22,6 +22,8 @@ namespace dp {
 
   class Context {
     public:
+      Context() : strategy_(NULL) {}
+
       void setStrategy(Strategy *strategy) { strategy_ = strategy; }
       void sort(std::vector<int> &vec) {
         assert(strategy_ != NULL);
@@ -34,16 +36,12 @@ namespace dp {
 
   class StableSortStrategy : public Strategy {
     public:
-      virtual void sort(std::vector<int> &vec) {
-        std::stable_sort(vec.begin(), vec.end());
-      }
+      virtual void sort(std::vector<int> &vec) { std::stable_sort(vec.begin(), vec.end()); }
   };
 
   class UnstableSortStrategy : public Strategy {
     public:
-      virtual void sort(std::vector<int> &vec) {
-        std::sort(vec.begin(), vec.end());
-      }
+      virtual void sort(std::vector<int> &vec) { std::sort(vec.begin(), vec.end()); }
   };
 
   void print(const std::vector<int> &vec) {
