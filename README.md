@@ -1,3 +1,32 @@
 照着资料写些设计模式的例子，加深理解。
 
-6个创建型，7个结构型
+```
+src
+  creational-pattern
+    simple_factory.cc
+    factory_method.cc
+    abstract_factory.cc
+    singleton.cc
+    prototype.cc
+    builder.cc
+  structural-pattern
+    adapter.cc
+    bridge.cc
+    composite.cc
+    decorator.cc
+    facade.cc
+    flyweight.cc
+    proxy.cc
+  behavioral-pattern
+    chain_of_responsibility.cc
+    command.cc
+    interpreter.cc
+    iterator.cc
+    mediator.cc
+    memento.cc
+    observer.cc
+    state.cc
+    strategy.cc
+    template_method.cc
+    visitor.cc
+```
